@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>org.topnetwork</groupId>
+		<artifactId>topbase-cloud-alibaba-dependencies</artifactId>
+		<version>2.8.52.TOP</version>
+		<relativePath />
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sparta</groupId>
+	<artifactId>sparta</artifactId>
+	<version>2.8.8.0.V</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>sparta-head</module>
+		<module>sparta-mapping</module>
+		<module>sparta-feign</module>
+		<module>sparta-gateway</module>
+		<module>sparta-framework</module>
+		<module>sparta-biz</module>
+		<module>sparta-do</module>
+		<module>sparta-base</module>
+		<module>sparta-admin</module>
+		<module>sparta-risk</module>
+		<module>sparta-pay</module>
+		<module>sparta-pay-sdk</module>
+		<module>sparta-pay-mock</module>
+		<module>sparta-message</module>
+		<module>sparta-websocket</module>
+		<module>sparta-wsdao</module>
+	</modules>
+
+	<properties>
+		<sparta.version>2.8.8.0.V</sparta.version>
+		<snakeyaml.version>1.32</snakeyaml.version>
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<dependency>
+				<groupId>org.yaml</groupId>
+				<artifactId>snakeyaml</artifactId>
+				<version>${snakeyaml.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-head</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-do</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-mapping</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-framework</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-feign</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-pay-sdk</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sparta</groupId>
+				<artifactId>sparta-biz</artifactId>
+				<version>${sparta.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.shardingsphere</groupId>
+				<artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+				<version>5.2.1</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profiles.active>dev</profiles.active>
+				<profiles.scope>compile</profiles.scope>
+				
+				<spring.cloud.nacos.discovery.server-addr>192.168.50.194:8848</spring.cloud.nacos.discovery.server-addr>
+				<spring.cloud.nacos.discovery.namespace>8d1806f0-5750-4cc7-b060-c130debce3b7</spring.cloud.nacos.discovery.namespace>
+				<spring.cloud.nacos.config.server-addr>192.168.50.194:8848</spring.cloud.nacos.config.server-addr>
+				<spring.cloud.nacos.config.namespace>8d1806f0-5750-4cc7-b060-c130debce3b7</spring.cloud.nacos.config.namespace>
+				<load.workId.config.host></load.workId.config.host>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+				<profiles.scope>compile</profiles.scope>
+				
+				<spring.cloud.nacos.discovery.server-addr>127.0.0.1:8848</spring.cloud.nacos.discovery.server-addr>
+				<spring.cloud.nacos.discovery.namespace>1698b500-9037-49b7-9b77-d610541b4498</spring.cloud.nacos.discovery.namespace>
+				<spring.cloud.nacos.config.server-addr>127.0.0.1:8848</spring.cloud.nacos.config.server-addr>
+				<spring.cloud.nacos.config.namespace>1698b500-9037-49b7-9b77-d610541b4498</spring.cloud.nacos.config.namespace>
+				<load.workId.config.host></load.workId.config.host>
+			</properties>
+		</profile>
+		
+		
+		<profile>
+			<id>sit</id>
+			<properties>
+				<profiles.active>sit</profiles.active>
+				<profiles.scope>test</profiles.scope>
+			</properties>
+		</profile>
+		
+		
+		<profile>
+			<id>pre</id>
+			<properties>
+				<profiles.active>pre</profiles.active>
+				<profiles.scope>test</profiles.scope>
+				
+				<spring.cloud.nacos.discovery.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.discovery.server-addr>
+				<spring.cloud.nacos.discovery.namespace>8d1806f0-5750-4cc7-b060-c130debce3b7</spring.cloud.nacos.discovery.namespace>
+				<spring.cloud.nacos.config.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.config.server-addr>
+				<spring.cloud.nacos.config.namespace>8d1806f0-5750-4cc7-b060-c130debce3b7</spring.cloud.nacos.config.namespace>
+				<load.workId.config.host></load.workId.config.host>
+			</properties>
+		</profile>
+		<profile>
+			<id>uat</id>
+			<properties>
+				<profiles.active>uat</profiles.active>
+				<profiles.scope>test</profiles.scope>
+				
+				<spring.cloud.nacos.discovery.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.discovery.server-addr>
+				<spring.cloud.nacos.discovery.namespace>5e99eb5d-4037-49de-9b0d-17d74d7a59c4</spring.cloud.nacos.discovery.namespace>
+				<spring.cloud.nacos.config.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.config.server-addr>
+				<spring.cloud.nacos.config.namespace>5e99eb5d-4037-49de-9b0d-17d74d7a59c4</spring.cloud.nacos.config.namespace>
+				<load.workId.config.host></load.workId.config.host>
+			</properties>
+		</profile>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<profiles.active>pro</profiles.active>
+				<profiles.scope>test</profiles.scope>
+				
+				<spring.cloud.nacos.discovery.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.discovery.server-addr>
+				<spring.cloud.nacos.discovery.namespace>2365aa44-6fbe-4fe9-8dcc-89f330eebe36</spring.cloud.nacos.discovery.namespace>
+				<spring.cloud.nacos.config.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.config.server-addr>
+				<spring.cloud.nacos.config.namespace>2365aa44-6fbe-4fe9-8dcc-89f330eebe36</spring.cloud.nacos.config.namespace>
+				<load.workId.config.host>http://svc-sparta-message.production-sparta.svc.cluster.local:8080</load.workId.config.host>
+			</properties>
+		</profile>
+		<profile>
+			<id>vgame</id>
+			<properties>
+				<profiles.active>vgame</profiles.active>
+				<profiles.scope>test</profiles.scope>
+				
+				<spring.cloud.nacos.discovery.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.discovery.server-addr>
+				<spring.cloud.nacos.discovery.namespace>46af235b-991d-4014-8c24-a925784a3f66</spring.cloud.nacos.discovery.namespace>
+				<spring.cloud.nacos.config.server-addr>nacos.production-nacos.svc.cluster.local:8848</spring.cloud.nacos.config.server-addr>
+				<spring.cloud.nacos.config.namespace>46af235b-991d-4014-8c24-a925784a3f66</spring.cloud.nacos.config.namespace>
+				<load.workId.config.host>http://svc-spartavgame-message.production-spartavgame.svc.cluster.local:8080</load.workId.config.host>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>
